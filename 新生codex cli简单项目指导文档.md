@@ -135,8 +135,10 @@
 > 课程仓库中已经放入脚手架。如果你是直接解压压缩包，请跳过 `git clone`。
 
 ```bash
-git clone <course-repo-url> leak-detector-starter
+git clone git@github.com:PKU-AFT/leak-detector-starter.git
 cd leak-detector-starter
+# 如未配置 SSH，可改用：
+# git clone https://github.com/PKU-AFT/leak-detector-starter.git
 ```
 
 项目目录结构与关键文件：
