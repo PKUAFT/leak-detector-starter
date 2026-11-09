@@ -8,6 +8,7 @@
 
 - `README.md`：安装、运行和项目状态；`CONTRIBUTING.md`：贡献和验证约定；`CHANGELOG.md`：实质变更记录。
 - `docs/exercise.md`：检测目标、接口和时序边界；`docs/README.md` 是文档索引。
+- `docs/reference/数据的前视偏差分析.md`：前视偏差和历史时点可用性的入门参考；分析数据可得时间、版本或样本选择时阅读。文中示例是假设情景，不是本项目检测效果的证据。
 - `src/factors/`：注册表及两个历史因子、一个故意泄露未来收益的示例。
 - `src/leak_detection/data.py`、`detector.py`、`pipeline.py`、`reporting.py`：数据、练习入口、管线和输出。
 - `tests/`：pytest 自动化测试；`tests/tools/`：手动运行的数据预览、生成与检测命令，它们不是 pytest 测试。
