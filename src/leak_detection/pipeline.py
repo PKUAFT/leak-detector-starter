@@ -43,7 +43,7 @@ def run_pipeline(
         )
     except NotImplementedError as exc:  # pragma: no cover - clarity for students
         raise RuntimeError(
-            "检测逻辑尚未实现。请先在 leak_detection/detector.py 中完成 detect_leaks 函数。"
+            "检测逻辑尚未实现。请先在 src/leak_detection/detector.py 中完成 detect_leaks 函数。"
         ) from exc
 
     if result.notes is None:

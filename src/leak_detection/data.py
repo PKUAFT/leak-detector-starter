@@ -7,7 +7,7 @@ from typing import Iterable, List, Tuple
 
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DATA_PATH = PROJECT_ROOT / "data" / "sample_factors.csv"
 
 
