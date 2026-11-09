@@ -1,0 +1,31 @@
+# Project-specific routing guidance. Codex does not automatically load this file;
+# AGENTS.md directs the agent to consult it. Skill discovery uses SKILL.md metadata.
+version = 1
+
+[policy]
+activate_for = ["User requests OpenSpec or spec-driven development", "User identifies an existing OpenSpec change", "A substantial multi-module or public-contract change needs a specification"]
+skip_for = ["Routine documentation, path, or configuration edits", "Small local fixes that do not need an OpenSpec proposal"]
+
+[[rules]]
+skill = "openspec-propose"
+when = "Create a proposal, design, specifications, and tasks for an applicable new change."
+
+[[rules]]
+skill = "openspec-explore"
+when = "Explore requirements and design tradeoffs in an explicitly requested or existing OpenSpec change."
+
+[[rules]]
+skill = "openspec-apply-change"
+when = "Implement or continue tasks for an identifiable existing OpenSpec change."
+
+[[rules]]
+skill = "openspec-update-change"
+when = "Revise an existing change's proposal, design, specifications, or task plan."
+
+[[rules]]
+skill = "openspec-sync-specs"
+when = "Synchronize delta specs when requested or included in the authorized workflow."
+
+[[rules]]
+skill = "openspec-archive-change"
+when = "Archive a completed OpenSpec change when requested; do not archive the GitHub repository."

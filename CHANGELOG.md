@@ -13,7 +13,9 @@
 
 ### Changed
 
-- 新增 `pyproject.toml` 集中声明项目依赖和 pytest 设置；旧 requirements 文件保留为兼容入口，`pytest.ini` 暂保留并与新配置同步。
+- 将 OpenSpec 技能从 `.agent/` 移至 Codex 可发现的 `.agents/skills/`，并添加项目路由文件 `.agents/activation.toml`。
+- 新增 `pyproject.toml` 集中声明项目依赖和 pytest 设置；`requirements.txt` 保留为兼容入口，`pytest.ini` 暂保留并与新配置同步。
+- 删除 `requirements-dev.txt`，开发依赖通过 `python -m pip install -e ".[dev]"` 安装。
 - 移除已提交的模拟 CSV；默认样本按需在本地 `outputs/` 生成，测试在临时目录生成数据。
 - 将数据预览、生成与检测命令入口移至 `tests/tools/`；这些手动工具不是 pytest 自动化测试。
 

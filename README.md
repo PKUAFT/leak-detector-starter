@@ -21,13 +21,13 @@ python -m pytest
 
 只运行项目可使用 `python -m pip install -e .`；使用 `.[dev]` 会同时安装测试依赖。可编辑安装使项目模块可以在交互式 Python 中导入。三个脚本可从任意当前目录通过脚本路径调用。
 
-依赖和 pytest 配置记录在 `pyproject.toml`。旧的 requirements 文件暂时保留为兼容入口；`pytest.ini` 也暂时保留，并与 `pyproject.toml` 中的测试配置一致。pytest 默认读取 `pytest.ini`；可使用 `python -m pytest -c pyproject.toml` 显式选择新配置。
+依赖和 pytest 配置记录在 `pyproject.toml`。`requirements.txt` 暂时保留为兼容入口；`pytest.ini` 也暂时保留，并与 `pyproject.toml` 中的测试配置一致。pytest 默认读取 `pytest.ini`；可使用 `python -m pytest -c pyproject.toml` 显式选择新配置。
 
 ## 目录
 
 ```text
 AGENTS.md                 Agent 工作指南
-.agent/                   OpenSpec 技能及工作流
+.agents/                  OpenSpec 技能及激活规则
 CHANGELOG.md              变更记录
 CONTRIBUTING.md           贡献与验证约定
 README.md                 项目入口

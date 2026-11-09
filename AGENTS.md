@@ -17,7 +17,7 @@
 
 用户明确要求 OpenSpec、规范驱动开发或指定现有 OpenSpec change 时使用；涉及多模块行为、公共接口或需要先确认设计的重大变更，也可使用。简单文档、路径、配置调整和局部修复直接处理，不强制创建提案。用户当前指令和仓库实际情况优先于生成的技能模板；不得因模板中的工具名称而调用不可用工具或擅自派发子任务。
 
-技能位于 `.agent/skills/`，在符合条件时读取对应 `SKILL.md`：
+技能位于 `.agents/skills/`，激活条件与阶段路由记录在 `.agents/activation.toml`；涉及 OpenSpec 时先读取该文件，再按任务读取对应 `SKILL.md`：
 
 - 新建提案、设计、规格和任务：`openspec-propose`。
 - 在 OpenSpec 变更上下文中探索需求和设计取舍：`openspec-explore`。
@@ -26,7 +26,7 @@
 - 按已授权的流程将变更规格同步至主规格：`openspec-sync-specs`。
 - 用户要求归档已完成的 OpenSpec 变更：`openspec-archive-change`；这不等同于归档 GitHub 仓库。
 
-Codex 不一定自动发现 `.agent/skills/`，因此由本指南按上述条件路由并读取相应文件。执行前用 `openspec --version` 检查本机 CLI；如缺失，说明限制并遵循用户指示，不静默安装全局软件。`openspec/config.yaml` 保存本项目上下文。OpenSpec 工具更新可能覆盖生成的技能描述，应复核激活条件。
+Codex 可发现 `.agents/skills/` 的技能，并根据各自 `SKILL.md` 的描述匹配任务；`.agents/activation.toml` 是本项目的补充说明，不是 Codex 原生自动加载的激活配置。执行前用 `openspec --version` 检查本机 CLI；如缺失，说明限制并遵循用户指示，不静默安装全局软件。`openspec/config.yaml` 保存本项目上下文。OpenSpec 生成器可能重建 `.agent/` 并覆盖原始技能描述，更新后应检查目录与激活条件。
 
 ## 本地工作
 

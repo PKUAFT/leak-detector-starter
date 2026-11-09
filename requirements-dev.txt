@@ -1,2 +1,0 @@
-# Compatibility entry point; development dependencies live in pyproject.toml.
--e .[dev]
