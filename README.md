@@ -13,12 +13,14 @@ git clone https://github.com/PKUAFT/leak-detector-starter.git
 cd leak-detector-starter
 python -m venv .venv
 source .venv/bin/activate  # Windows PowerShell: .venv\Scripts\Activate.ps1
-python -m pip install -r requirements-dev.txt
+python -m pip install -e ".[dev]"
 python tests/tools/preview_data.py -n 5
 python -m pytest
 ```
 
-只运行脚本可安装 `requirements.txt`；运行测试还需要 `requirements-dev.txt`。三个脚本可从任意当前目录通过脚本路径调用。仓库采用 `src/` 布局，若在交互式 Python 中导入包，可在仓库根目录执行 `PYTHONPATH=src python`（PowerShell 使用 `$env:PYTHONPATH = "src"`）。
+只运行项目可使用 `python -m pip install -e .`；使用 `.[dev]` 会同时安装测试依赖。可编辑安装使项目模块可以在交互式 Python 中导入。三个脚本可从任意当前目录通过脚本路径调用。
+
+依赖和 pytest 配置记录在 `pyproject.toml`。旧的 requirements 文件暂时保留为兼容入口；`pytest.ini` 也暂时保留，并与 `pyproject.toml` 中的测试配置一致。pytest 默认读取 `pytest.ini`；可使用 `python -m pytest -c pyproject.toml` 显式选择新配置。
 
 ## 目录
 

@@ -20,12 +20,12 @@
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # Windows PowerShell: .venv\Scripts\Activate.ps1
-python -m pip install -r requirements-dev.txt
+python -m pip install -e ".[dev]"
 python tests/tools/preview_data.py -n 5
 python -m pytest
 ```
 
-测试配置通过 `pytest.ini` 添加 `src/`；从交互式 Python 导入时设置 `PYTHONPATH=src`。检测管线在未实现时应报明确错误，不应伪造成功报告。`python tests/tools/regenerate_data.py` 默认覆盖 `data/sample_factors.csv`，更改样本前先确认任务需要；可用 `--output outputs/sample_factors.csv` 另存。
+依赖和测试配置见 `pyproject.toml`。暂存的 `pytest.ini` 是 pytest 的默认配置，须与其中的测试配置保持一致；可用 `python -m pytest -c pyproject.toml` 显式验证新配置。可编辑安装后可直接导入项目模块。检测管线在未实现时应报明确错误，不应伪造成功报告。`python tests/tools/regenerate_data.py` 默认覆盖 `data/sample_factors.csv`，更改样本前先确认任务需要；可用 `--output outputs/sample_factors.csv` 另存。
 
 ## 修改约定
 

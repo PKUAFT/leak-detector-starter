@@ -1,2 +1,2 @@
--r requirements.txt
-pytest>=7
+# Compatibility entry point; development dependencies live in pyproject.toml.
+-e .[dev]
