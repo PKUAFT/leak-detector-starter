@@ -1,6 +1,7 @@
 """Regenerate the simulated factor dataset."""
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -12,7 +13,7 @@ if str(SOURCE_ROOT) not in sys.path:
 from leak_detection.simulator import write_dataset
 
 
-def main(target: str | None = None) -> Path:
+def main(target: str | Path | None = None) -> Path:
     """Write the dataset to ``target`` (defaults to data/sample_factors.csv)."""
 
     path = write_dataset(Path(target) if target else None)
@@ -21,4 +22,10 @@ def main(target: str | None = None) -> Path:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Regenerate the simulated market dataset")
+    parser.add_argument(
+        "--output", type=Path, default=None,
+        help="Output CSV path (default: repository data/sample_factors.csv)",
+    )
+    args = parser.parse_args()
+    main(args.output)
