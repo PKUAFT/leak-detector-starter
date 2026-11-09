@@ -31,14 +31,14 @@ def test_source_import_and_default_data_outside_checkout(tmp_path):
 
 
 def test_pipeline_reports_the_intentional_exercise_placeholder(tmp_path):
-    result = run_python([str(ROOT / "scripts" / "run_pipeline.py")], tmp_path)
+    result = run_python([str(ROOT / "tests" / "tools" / "run_pipeline.py")], tmp_path)
     assert result.returncode != 0
     assert "检测逻辑尚未实现" in result.stderr
     assert not (tmp_path / "outputs").exists()
 
 
 def test_preview_command_reads_the_bundled_data_from_any_directory(tmp_path):
-    result = run_python([str(ROOT / "scripts" / "preview_data.py"), "-n", "2"], tmp_path)
+    result = run_python([str(ROOT / "tests" / "tools" / "preview_data.py"), "-n", "2"], tmp_path)
     assert result.returncode == 0, result.stderr
     assert "symbol" in result.stdout
     assert "AAA" in result.stdout
