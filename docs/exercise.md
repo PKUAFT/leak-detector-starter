@@ -4,7 +4,7 @@
 
 实现 `src/leak_detection/detector.py` 的 `detect_leaks`，接收行情 DataFrame 和因子注册表，返回 `LeakDetectionResult`，用 `LeakViolation` 描述疑似问题。当前实现刻意抛出 `NotImplementedError`，这是练习起点。
 
-示例数据由 `src/leak_detection/simulator.py` 生成；`src/factors/sample_factors.py` 包含两个基于历史数据的因子及一个故意引用下一日收盘价的因子。管线读取数据、调用检测器，再通过 reporting 写出 CSV、JSON 和 Markdown。
+示例数据不随仓库提供，运行 `python tests/tools/regenerate_data.py` 可在本地 `outputs/sample_factors.csv` 生成；其生成逻辑位于 `src/leak_detection/simulator.py`。`src/factors/sample_factors.py` 包含两个基于历史数据的因子及一个故意引用下一日收盘价的因子。管线读取数据、调用检测器，再通过 reporting 写出 CSV、JSON 和 Markdown。
 
 ## 推荐方法
 

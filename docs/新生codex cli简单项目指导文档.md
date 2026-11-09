@@ -1,4 +1,4 @@
-> **历史课程资料：** 以下保留原始教学内容，其中目录结构、克隆地址、依赖及 Codex CLI 安装和命令可能过时。当前项目入口请参阅 [README](../README.md)，练习说明请参阅 [exercise.md](exercise.md)；Codex CLI 请查询当前官方文档。当前手动入口已从 `scripts/` 移至 `tests/tools/`，对应文件名不变；当前 Python 包位于 `src/`。
+> **历史课程资料：** 以下保留原始教学内容，其中目录结构、克隆地址、依赖及 Codex CLI 安装和命令可能过时。当前项目入口请参阅 [README](../README.md)，练习说明请参阅 [exercise.md](exercise.md)；Codex CLI 请查询当前官方文档。当前手动入口已从 `scripts/` 移至 `tests/tools/`，对应文件名不变；当前 Python 包位于 `src/`；示例 CSV 不随仓库提供，需按根目录 README 在本地生成。
 
 # 新生 Codex CLI 简单项目指导文档
 
