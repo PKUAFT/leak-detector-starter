@@ -6,10 +6,10 @@
 
 ## 快速开始
 
-需要 Python 3.10–3.12，以及有权访问本私有仓库的 GitHub 账号。克隆后在仓库根目录执行：
+需要 Python 3.10–3.12 和 Git。克隆后在仓库根目录执行：
 
 ```bash
-git clone git@github.com:PKUAFT/leak-detector-starter.git
+git clone https://github.com/PKUAFT/leak-detector-starter.git
 cd leak-detector-starter
 python -m venv .venv
 source .venv/bin/activate  # Windows PowerShell: .venv\Scripts\Activate.ps1

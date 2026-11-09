@@ -13,6 +13,7 @@
 
 - 将 `factors` 和 `leak_detection` 核心包移至 `src/`，将原新生指导文档移至 `docs/` 并标为历史资料。
 - 更新 README、测试路径配置和运行脚本的源码与数据定位。
+- 仓库改为公开，README 使用公开 HTTPS 克隆地址。
 
 ### Fixed
 
