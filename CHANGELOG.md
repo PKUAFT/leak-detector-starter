@@ -13,6 +13,7 @@
 
 ### Changed
 
+- 将历史新生指导文档移至 `docs/homework/`，移除重复练习说明和历史分析目录，并更新文档入口。
 - 将 OpenSpec 技能从 `.agent/` 移至 Codex 可发现的 `.agents/skills/`，并添加项目路由文件 `.agents/activation.toml`。
 - 新增 `pyproject.toml` 集中声明项目依赖和 pytest 设置；`requirements.txt` 保留为兼容入口，`pytest.ini` 暂保留并与新配置同步。
 - 删除 `requirements-dev.txt`，开发依赖通过 `python -m pip install -e ".[dev]"` 安装。
