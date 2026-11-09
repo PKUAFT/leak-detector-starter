@@ -1,68 +1,44 @@
-# 因子泄露检测入门项目（Leak Detector Starter）
+# 因子泄露检测入门项目
 
-本项目用于金融科技协会新生训练：一边熟悉 Codex CLI 的安装与使用，一边基于我们提供的脚手架实现“因子代码是否泄露未来信息”的检测工具。
+这是一个用于金融科技协会新生训练的 Python 脚手架。学员通过实现因子代码的未来信息泄露检测，练习时序数据分析、测试和使用编程 Agent。项目附带模拟行情、示例因子和报告输出接口。
 
-## 项目亮点
-- **模拟行情数据**：`data/sample_factors.csv` 仅包含 OHLCV 与 1 日收益，可由 `leak_detection/simulator.py` 重新生成。
-- **因子注册表**：`factors/` 下提供三个示例因子，其中 `factor_future_return` 故意引用未来数据，便于做正反案例。
-- **检测流水线**：`leak_detection/` 目录中需要补全 `detect_leaks`，完成后可输出 CSV / JSON / Markdown 报告。
-- **命令行脚本**：`scripts/` 提供重制数据、预览样本、运行管线等脚本，方便验证。
-- **配套文档**：`新生codex cli简单项目指导文档.md` 手把手讲解代理设置、Codex CLI 安装与推荐工作流。
+**当前状态：** `detect_leaks` 是有意留给学员完成的练习，直接运行检测管线会提示尚未实现。现有基础测试通过不代表检测器可用，也不能证明数据不存在泄露。
 
-## 快速上手
-1. **安装前置环境**
-   - Python 3.10–3.12
-   - Node.js 18 LTS（用于安装 Codex CLI，可通过 `nodejs.org`、`nvm` 等途径获取）
-   - Git（Windows 建议 Git Bash，macOS 可安装 Xcode Command Line Tools）
-2. **克隆项目并进入目录**
-   ```bash
-   git clone git@github.com:PKU-AFT/leak-detector-starter.git
-   cd leak-detector-starter
-   ```
-3. **创建并激活虚拟环境**
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate      # macOS/Linux/Git Bash
-   # .venv\Scripts\Activate.ps1   # Windows PowerShell
-   ```
-4. **安装依赖**
-   ```bash
-   pip install -r requirements.txt
-   ```
-5. **（可选）安装 Codex CLI**
-   ```bash
-   npm install -g @openai/codex-cli
-   codex --version
-   ```
-6. **基础验证**
-   ```bash
-   python scripts/preview_data.py -n 5
-   python -m pytest
-   ```
+## 快速开始
 
-## 你需要完成的任务
-- 打开 `leak_detection/detector.py`，实现 `detect_leaks` 函数，核心要求：
-  - 以“前推重算”方式回放每个因子函数，只用到 `<= as_of` 的数据。
-  - 捕捉引用未来信息的因子（例如示例中的 `factor_future_return`）。
-  - 将发现的问题记录为 `LeakViolation` 并封装在 `LeakDetectionResult` 中返回。
-- 完成后运行：
-  ```bash
-  python scripts/run_pipeline.py --output outputs/manual
-  ```
-  检查 `outputs/manual/summary.csv` 中是否列出泄露的因子函数。
+需要 Python 3.10–3.12，以及有权访问本私有仓库的 GitHub 账号。克隆后在仓库根目录执行：
 
-## 搭配 Codex CLI 的推荐流程
-1. 使用 `codex exec "rg 'NotImplementedError'"` 找出未完成代码。
-2. 将 `factors/sample_factors.py` 的函数发给 Codex，讨论检测策略（前推检验、静态分析等）。
-3. 迭代实现，持续运行 `codex exec "python -m pytest"` 及管线脚本验证效果。
-4. 利用 `/save` 或个人笔记记录关键思路与踩坑总结。
+```bash
+git clone git@github.com:PKUAFT/leak-detector-starter.git
+cd leak-detector-starter
+python -m venv .venv
+source .venv/bin/activate  # Windows PowerShell: .venv\Scripts\Activate.ps1
+python -m pip install -r requirements-dev.txt
+python scripts/preview_data.py -n 5
+python -m pytest
+```
 
-## 参考资源
-- 详细操作指南：`新生codex cli简单项目指导文档.md`
-- 重新生成数据：`python scripts/regenerate_data.py`
-- 因子注册表工具：`from factors import get_registered_factors`
+只运行脚本可安装 `requirements.txt`；运行测试还需要 `requirements-dev.txt`。三个脚本可从任意当前目录通过脚本路径调用。仓库采用 `src/` 布局，若在交互式 Python 中导入包，可在仓库根目录执行 `PYTHONPATH=src python`（PowerShell 使用 `$env:PYTHONPATH = "src"`）。
 
-## 延伸练习
-- 自行添加更多安全/不安全因子，观察检测器表现。
-- 为 `detect_leaks` 编写针对性的单元测试。
-- 探索更多检测手段：AST 静态分析、统计漂移检测等。
+## 目录
+
+```text
+AGENTS.md                 Agent 工作指南
+CHANGELOG.md              变更记录
+CONTRIBUTING.md           贡献与验证约定
+README.md                 项目入口
+src/factors/              因子注册表及安全/泄露示例
+src/leak_detection/       数据、待实现的检测器、管线及报告
+scripts/                  数据预览、生成及检测命令入口
+data/                     小型模拟行情数据
+tests/                    基础测试及入口检查
+docs/                     任务、设计与历史教学文档
+```
+
+## 练习
+
+在 [`src/leak_detection/detector.py`](src/leak_detection/detector.py) 实现 `detect_leaks`：对注册因子进行只使用截至给定时点数据的前推重算，将疑似问题封装为 `LeakViolation` 和 `LeakDetectionResult`。有意泄露的例子是 [`factor_future_return`](src/factors/sample_factors.py)。
+
+实现并添加有意义的测试后，可运行 `python scripts/run_pipeline.py --output outputs/manual`，查看 CSV、JSON 和 Markdown 报告。命令默认在当前工作目录创建输出；模拟数据可用 `python scripts/regenerate_data.py` 重建，该命令默认覆盖仓库中的样本数据。前推重算只能检查特定运行和输入下的未来依赖，不能证明输入字段的真实可得时间或整个研究流程没有泄露。
+
+更多说明见 [文档索引](docs/README.md)、[练习与设计说明](docs/exercise.md)、[贡献指南](CONTRIBUTING.md)、[变更记录](CHANGELOG.md) 和 [Agent 指南](AGENTS.md)。
