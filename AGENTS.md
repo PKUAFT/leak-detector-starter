@@ -24,7 +24,7 @@ python tests/tools/preview_data.py -n 5
 python -m pytest
 ```
 
-测试配置通过 `pytest.ini` 添加 `src/`；从交互式 Python 导入时设置 `PYTHONPATH=src`。检测管线在未实现时应报明确错误，不应伪造成功报告。`python tests/tools/regenerate_data.py` 默认覆盖 `data/sample_factors.csv`，更改样本前先确认任务需要。
+测试配置通过 `pytest.ini` 添加 `src/`；从交互式 Python 导入时设置 `PYTHONPATH=src`。检测管线在未实现时应报明确错误，不应伪造成功报告。`python tests/tools/regenerate_data.py` 默认覆盖 `data/sample_factors.csv`，更改样本前先确认任务需要；可用 `--output outputs/sample_factors.csv` 另存。
 
 ## 修改约定
 
