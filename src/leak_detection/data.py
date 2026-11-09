@@ -29,7 +29,7 @@ def load_sample_factors(path: Path | None = None) -> pd.DataFrame:
     target_path = Path(path) if path else DEFAULT_DATA_PATH
     if not target_path.exists():
         raise FileNotFoundError(
-            f"Dataset not found at {target_path}. Run scripts/regenerate_data.py to create it."
+            f"Dataset not found at {target_path}. Run tests/tools/regenerate_data.py to create it."
         )
     df = pd.read_csv(target_path, parse_dates=["date"])
     df.sort_values(["symbol", "date"], inplace=True)
