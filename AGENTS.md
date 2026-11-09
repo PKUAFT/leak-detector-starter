@@ -13,6 +13,21 @@
 - `src/leak_detection/data.py`、`detector.py`、`pipeline.py`、`reporting.py`：数据、练习入口、管线和输出。
 - `tests/`：pytest 自动化测试；`tests/tools/`：手动运行的数据预览、生成与检测命令，它们不是 pytest 测试。
 
+## OpenSpec 技能与激活条件
+
+用户明确要求 OpenSpec、规范驱动开发或指定现有 OpenSpec change 时使用；涉及多模块行为、公共接口或需要先确认设计的重大变更，也可使用。简单文档、路径、配置调整和局部修复直接处理，不强制创建提案。用户当前指令和仓库实际情况优先于生成的技能模板；不得因模板中的工具名称而调用不可用工具或擅自派发子任务。
+
+技能位于 `.agent/skills/`，在符合条件时读取对应 `SKILL.md`：
+
+- 新建提案、设计、规格和任务：`openspec-propose`。
+- 在 OpenSpec 变更上下文中探索需求和设计取舍：`openspec-explore`。
+- 实施或继续已存在的 OpenSpec 变更：`openspec-apply-change`。
+- 修改现有变更的规划文件：`openspec-update-change`。
+- 按已授权的流程将变更规格同步至主规格：`openspec-sync-specs`。
+- 用户要求归档已完成的 OpenSpec 变更：`openspec-archive-change`；这不等同于归档 GitHub 仓库。
+
+Codex 不一定自动发现 `.agent/skills/`，因此由本指南按上述条件路由并读取相应文件。执行前用 `openspec --version` 检查本机 CLI；如缺失，说明限制并遵循用户指示，不静默安装全局软件。`openspec/config.yaml` 保存本项目上下文。OpenSpec 工具更新可能覆盖生成的技能描述，应复核激活条件。
+
 ## 本地工作
 
 使用 Python 3.10–3.12，在仓库根目录执行：

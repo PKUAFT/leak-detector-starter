@@ -1,0 +1,7 @@
+schema: spec-driven
+
+context: |
+  This is a Python teaching scaffold for detecting look-ahead bias in factor code.
+  The detector is intentionally left unimplemented as an exercise unless the user explicitly asks otherwise.
+  Simulated data is generated locally; tests do not establish market validity or point-in-time correctness.
+  Follow AGENTS.md and verify behavior with the project's actual tests.

@@ -27,6 +27,7 @@ python -m pytest
 
 ```text
 AGENTS.md                 Agent 工作指南
+.agent/                   OpenSpec 技能及工作流
 CHANGELOG.md              变更记录
 CONTRIBUTING.md           贡献与验证约定
 README.md                 项目入口
@@ -34,6 +35,7 @@ src/factors/              因子注册表及安全/泄露示例
 src/leak_detection/       数据、待实现的检测器、管线及报告
 tests/                    自动化测试；tools/ 存放手动运行的命令入口
 docs/                     任务、设计、参考资料与历史教学文档
+openspec/                 规格驱动变更的项目配置
 ```
 
 ## 练习
