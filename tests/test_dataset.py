@@ -1,7 +1,12 @@
 import pandas as pd
+from pathlib import Path
 
 from factors import get_registered_factors
 from leak_detection.data import DEFAULT_DATA_PATH, describe_dataset, load_sample_factors
+
+
+def test_default_sample_is_generated_under_ignored_outputs():
+    assert DEFAULT_DATA_PATH == Path(__file__).resolve().parents[1] / "outputs" / "sample_factors.csv"
 
 
 def test_sample_dataset_exists():
