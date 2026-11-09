@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 
@@ -42,3 +43,18 @@ def test_preview_command_reads_the_bundled_data_from_any_directory(tmp_path):
     assert result.returncode == 0, result.stderr
     assert "symbol" in result.stdout
     assert "AAA" in result.stdout
+
+
+def test_regenerate_command_can_write_to_an_explicit_path(tmp_path):
+    target = tmp_path / "generated.csv"
+    checkout = tmp_path / "checkout"
+    shutil.copytree(ROOT / "src", checkout / "src", ignore=shutil.ignore_patterns("__pycache__"))
+    shutil.copytree(ROOT / "tests" / "tools", checkout / "tests" / "tools")
+    result = run_python(
+        [str(checkout / "tests" / "tools" / "regenerate_data.py"), "--output", str(target)],
+        tmp_path,
+    )
+    assert result.returncode == 0, result.stderr
+    assert target.is_file()
+    assert len(target.read_text().splitlines()) == 181
+    assert not (checkout / "data" / "sample_factors.csv").exists()
