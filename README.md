@@ -14,7 +14,7 @@ cd leak-detector-starter
 python -m venv .venv
 source .venv/bin/activate  # Windows PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install -r requirements-dev.txt
-python scripts/preview_data.py -n 5
+python tests/tools/preview_data.py -n 5
 python -m pytest
 ```
 
@@ -29,9 +29,8 @@ CONTRIBUTING.md           贡献与验证约定
 README.md                 项目入口
 src/factors/              因子注册表及安全/泄露示例
 src/leak_detection/       数据、待实现的检测器、管线及报告
-scripts/                  数据预览、生成及检测命令入口
 data/                     小型模拟行情数据
-tests/                    基础测试及入口检查
+tests/                    自动化测试；tools/ 存放手动运行的命令入口
 docs/                     任务、设计与历史教学文档
 ```
 
@@ -39,6 +38,6 @@ docs/                     任务、设计与历史教学文档
 
 在 [`src/leak_detection/detector.py`](src/leak_detection/detector.py) 实现 `detect_leaks`：对注册因子进行只使用截至给定时点数据的前推重算，将疑似问题封装为 `LeakViolation` 和 `LeakDetectionResult`。有意泄露的例子是 [`factor_future_return`](src/factors/sample_factors.py)。
 
-实现并添加有意义的测试后，可运行 `python scripts/run_pipeline.py --output outputs/manual`，查看 CSV、JSON 和 Markdown 报告。命令默认在当前工作目录创建输出；模拟数据可用 `python scripts/regenerate_data.py` 重建，该命令默认覆盖仓库中的样本数据。前推重算只能检查特定运行和输入下的未来依赖，不能证明输入字段的真实可得时间或整个研究流程没有泄露。
+实现并添加有意义的测试后，可运行 `python tests/tools/run_pipeline.py --output outputs/manual`，查看 CSV、JSON 和 Markdown 报告。命令默认在当前工作目录创建输出；模拟数据可用 `python tests/tools/regenerate_data.py` 重建，该命令默认覆盖仓库中的样本数据。前推重算只能检查特定运行和输入下的未来依赖，不能证明输入字段的真实可得时间或整个研究流程没有泄露。
 
 更多说明见 [文档索引](docs/README.md)、[练习与设计说明](docs/exercise.md)、[贡献指南](CONTRIBUTING.md)、[变更记录](CHANGELOG.md) 和 [Agent 指南](AGENTS.md)。

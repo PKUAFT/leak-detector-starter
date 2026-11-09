@@ -10,7 +10,7 @@
 - `docs/exercise.md`：检测目标、接口和时序边界；`docs/README.md` 是文档索引。
 - `src/factors/`：注册表及两个历史因子、一个故意泄露未来收益的示例。
 - `src/leak_detection/data.py`、`detector.py`、`pipeline.py`、`reporting.py`：数据、练习入口、管线和输出。
-- `scripts/`：命令入口；`tests/`：基本数据和命令行为验证。
+- `tests/`：pytest 自动化测试；`tests/tools/`：手动运行的数据预览、生成与检测命令，它们不是 pytest 测试。
 
 ## 本地工作
 
@@ -20,11 +20,11 @@
 python -m venv .venv
 source .venv/bin/activate  # Windows PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install -r requirements-dev.txt
-python scripts/preview_data.py -n 5
+python tests/tools/preview_data.py -n 5
 python -m pytest
 ```
 
-测试配置通过 `pytest.ini` 添加 `src/`；从交互式 Python 导入时设置 `PYTHONPATH=src`。检测管线在未实现时应报明确错误，不应伪造成功报告。`python scripts/regenerate_data.py` 默认覆盖 `data/sample_factors.csv`，更改样本前先确认任务需要。
+测试配置通过 `pytest.ini` 添加 `src/`；从交互式 Python 导入时设置 `PYTHONPATH=src`。检测管线在未实现时应报明确错误，不应伪造成功报告。`python tests/tools/regenerate_data.py` 默认覆盖 `data/sample_factors.csv`，更改样本前先确认任务需要。
 
 ## 修改约定
 
