@@ -8,7 +8,7 @@ from typing import Iterable, List, Tuple
 import pandas as pd
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_DATA_PATH = PROJECT_ROOT / "data" / "sample_factors.csv"
+DEFAULT_DATA_PATH = PROJECT_ROOT / "outputs" / "sample_factors.csv"
 
 
 @dataclass
@@ -24,13 +24,15 @@ class DatasetDescriptor:
 
 
 def load_sample_factors(path: Path | None = None) -> pd.DataFrame:
-    """Load the simulated factor dataset shipped with the project."""
+    """Load locally generated simulated data, or a caller-specified CSV."""
 
     target_path = Path(path) if path else DEFAULT_DATA_PATH
     if not target_path.exists():
-        raise FileNotFoundError(
-            f"Dataset not found at {target_path}. Run tests/tools/regenerate_data.py to create it."
+        hint = (
+            "Run python tests/tools/regenerate_data.py to generate the default sample."
+            if path is None else "Check the requested CSV path or generate data at that path."
         )
+        raise FileNotFoundError(f"Dataset not found at {target_path}. {hint}")
     df = pd.read_csv(target_path, parse_dates=["date"])
     df.sort_values(["symbol", "date"], inplace=True)
     df.reset_index(drop=True, inplace=True)

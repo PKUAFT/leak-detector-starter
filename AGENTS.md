@@ -21,11 +21,12 @@
 python -m venv .venv
 source .venv/bin/activate  # Windows PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install -e ".[dev]"
+python tests/tools/regenerate_data.py
 python tests/tools/preview_data.py -n 5
 python -m pytest
 ```
 
-依赖和测试配置见 `pyproject.toml`。暂存的 `pytest.ini` 是 pytest 的默认配置，须与其中的测试配置保持一致；可用 `python -m pytest -c pyproject.toml` 显式验证新配置。可编辑安装后可直接导入项目模块。检测管线在未实现时应报明确错误，不应伪造成功报告。`python tests/tools/regenerate_data.py` 默认覆盖 `data/sample_factors.csv`，更改样本前先确认任务需要；可用 `--output outputs/sample_factors.csv` 另存。
+依赖和测试配置见 `pyproject.toml`。暂存的 `pytest.ini` 是 pytest 的默认配置，须与其中的测试配置保持一致；可用 `python -m pytest -c pyproject.toml` 显式验证新配置。可编辑安装后可直接导入项目模块。检测管线在未实现时应报明确错误，不应伪造成功报告。`python tests/tools/regenerate_data.py` 默认生成并覆盖未跟踪的 `outputs/sample_factors.csv`；可用 `--output outputs/other_sample.csv` 另存。测试自行使用临时目录生成数据，无需预先生成默认样本。
 
 ## 修改约定
 
@@ -33,5 +34,5 @@ python -m pytest
 - 涉及研究或分析结论时，按 `docs/analysis/TEMPLATE.md` 保存来源、方法、结果与局限；不为简单改动创建空报告。
 - 修改时间序列逻辑时写针对正例、负例和边界情况的测试。注意同一时点的完整截面、顺序、缺失值和索引；不要以全量数据拟合的结果冒充截至当时可得信息。
 - 记录验证命令和结果。基础测试通过不等于检测器已实现或不存在泄露；不要把相关性或前推重算当成无泄露证明。
-- 保留原有练习数据和历史文档；不要提交虚拟环境、缓存、输出、密钥或私人数据。
+- 保留模拟数据生成器和历史文档；不要提交生成的数据、虚拟环境、缓存、输出、密钥或私人数据。
 - 旧的 Codex CLI 指导文档仅供历史参考；产品安装和命令以当前官方文档为准。

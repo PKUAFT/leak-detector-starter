@@ -1,4 +1,4 @@
-> **历史课程资料：** 以下保留原始教学内容，其中目录结构、克隆地址、依赖及 Codex CLI 安装和命令可能过时。当前项目入口请参阅 [README](../README.md)，练习说明请参阅 [exercise.md](exercise.md)；Codex CLI 请查询当前官方文档。当前手动入口已从 `scripts/` 移至 `tests/tools/`，对应文件名不变；当前 Python 包位于 `src/`。
+> **历史课程资料：** 以下保留原始教学内容，其中目录结构、克隆地址、依赖及 Codex CLI 安装和命令可能过时。当前项目入口请参阅 [README](../README.md)，练习说明请参阅 [exercise.md](exercise.md)；Codex CLI 请查询当前官方文档。当前手动入口已从 `scripts/` 移至 `tests/tools/`，对应文件名不变；当前 Python 包位于 `src/`；示例 CSV 不随仓库提供，需按根目录 README 在本地生成。
 
 # 新生 Codex CLI 简单项目指导文档
 
@@ -147,7 +147,7 @@ cd leak-detector-starter
 
 ```
 .
-├── data/
+├── outputs/                  # 当前版本运行生成命令后才出现（不纳入版本库）
 │   └── sample_factors.csv        # 仅含 OHLCV + ret_1d 的模拟数据
 ├── factors/
 │   ├── __init__.py               # 因子注册表（含函数元数据）
@@ -206,7 +206,7 @@ cd leak-detector-starter
 
 | 组件 | 功能 | 如何尝试 |
 | --- | --- | --- |
-| `data/sample_factors.csv` | 3 只股票、60 个交易日的 OHLCV + `ret_1d` 数据（不含任何因子值） | `python scripts/preview_data.py` |
+| `outputs/sample_factors.csv` | 3 只股票、60 个交易日的 OHLCV + `ret_1d` 数据（不含任何因子值） | `python scripts/preview_data.py` |
 | `factors/sample_factors.py` | 提供 3 个因子函数：两个合规、一个故意使用未来数据 | 阅读源码或 `from factors import get_registered_factors` |
 | `leak_detection/detector.py` | 你要补全的检测逻辑，输入行情 + 因子函数，输出疑似泄露清单 | 在编辑器中打开并实现 |
 | `leak_detection/pipeline.py` | 调用数据加载、因子注册表和检测器，生成报告文件 | `python scripts/run_pipeline.py`（需先实现检测逻辑） |

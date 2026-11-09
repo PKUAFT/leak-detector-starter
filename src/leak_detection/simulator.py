@@ -7,8 +7,9 @@ from typing import Iterable
 import numpy as np
 import pandas as pd
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_OUTPUT_PATH = PROJECT_ROOT / "data" / "sample_factors.csv"
+from .data import DEFAULT_DATA_PATH
+
+DEFAULT_OUTPUT_PATH = DEFAULT_DATA_PATH
 
 
 def generate_dataset(
@@ -54,7 +55,7 @@ def generate_dataset(
 
 
 def write_dataset(path: Path | None = None) -> Path:
-    """Generate the dataset and persist it to ``path`` (defaults to ``data/sample_factors.csv``)."""
+    """Generate the dataset and persist it to ``path`` (defaults to ``outputs/sample_factors.csv``)."""
 
     target_path = Path(path) if path else DEFAULT_OUTPUT_PATH
     df = generate_dataset()

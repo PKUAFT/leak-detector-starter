@@ -14,7 +14,7 @@ from leak_detection.simulator import write_dataset
 
 
 def main(target: str | Path | None = None) -> Path:
-    """Write the dataset to ``target`` (defaults to data/sample_factors.csv)."""
+    """Write the dataset to ``target`` (defaults to outputs/sample_factors.csv)."""
 
     path = write_dataset(Path(target) if target else None)
     print(f"Dataset saved to {path}")
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Regenerate the simulated market dataset")
     parser.add_argument(
         "--output", type=Path, default=None,
-        help="Output CSV path (default: repository data/sample_factors.csv)",
+        help="Output CSV path (default: repository outputs/sample_factors.csv)",
     )
     args = parser.parse_args()
     main(args.output)
