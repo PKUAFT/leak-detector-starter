@@ -34,7 +34,7 @@ README.md                 项目入口
 src/factors/              因子注册表及安全/泄露示例
 src/leak_detection/       数据、待实现的检测器、管线及报告
 tests/                    自动化测试；tools/ 存放手动运行的命令入口
-docs/                     参考资料及历史课程练习文档
+docs/                     参考资料及脚手架搭建指南
 openspec/                 规格驱动变更的项目配置
 ```
 
@@ -46,4 +46,4 @@ openspec/                 规格驱动变更的项目配置
 
 入门阅读：[数据的前视偏差分析](docs/reference/数据的前视偏差分析.md)介绍历史时点可用性、数据修订、样本选择和自检方法；文中日期和数值均为假设示例。
 
-更多说明见 [文档索引](docs/README.md)、[历史新生练习文档](docs/homework/新生codex%20cli简单项目指导文档.md)、[贡献指南](CONTRIBUTING.md)、[变更记录](CHANGELOG.md) 和 [Agent 指南](AGENTS.md)。
+更多说明见 [文档索引](docs/README.md)、[脚手架搭建指南](docs/homework/因子泄露检测脚手架搭建指南.md)、[贡献指南](CONTRIBUTING.md)、[变更记录](CHANGELOG.md) 和 [Agent 指南](AGENTS.md)。
