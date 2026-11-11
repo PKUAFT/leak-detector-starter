@@ -1,31 +1,75 @@
-# Project-specific routing guidance. Codex does not automatically load this file;
-# AGENTS.md directs the agent to consult it. Skill discovery uses SKILL.md metadata.
+# Project-owned guidance for an agent, not a Codex or OpenSpec native configuration.
+# AGENTS.md tells the agent to read this file. Nothing here runs automatically.
 version = 1
 
 [policy]
-activate_for = ["User requests OpenSpec or spec-driven development", "User identifies an existing OpenSpec change", "A substantial multi-module or public-contract change needs a specification"]
-skip_for = ["Routine documentation, path, or configuration edits", "Small local fixes that do not need an OpenSpec proposal"]
+activate_for = [
+  "User explicitly requests OpenSpec or spec-driven development",
+  "User identifies an existing OpenSpec change and asks to work on it",
+  "A substantial multi-module or public-contract change needs a specification before implementation",
+]
+skip_for = [
+  "Routine documentation, path, or configuration edits that do not request an OpenSpec workflow",
+  "Small local fixes that do not need an OpenSpec proposal",
+]
+# Examples are intent cues, not a keyword matcher. An explicit user request takes
+# precedence over skip_for; follow user scope and the selected SKILL.md.
+explicit_request_examples = ["使用 OpenSpec", "规范驱动开发", "openspec", "spec-driven development", "$openspec-propose"]
+
+[context]
+# Read existing files before an OpenSpec task; inspect task-relevant source and
+# tests as needed. These are project instructions, not tool-enforced pre-hooks.
+pre_read = ["AGENTS.md", "README.md", "openspec/config.yaml"]
+conditional_pre_read = [
+  "CONTRIBUTING.md for implementation or validation conventions",
+  "docs/reference/数据的前视偏差分析.md for data availability, revisions, or sample selection",
+  "Relevant existing change artifacts and main specifications, as identified by openspec status and instructions",
+]
+
+[paths]
+# Paths without placeholders are relative to the repository root. These are
+# conventions for orientation, not assertions that the optional paths exist.
+activation = ".agents/activation.toml"
+skills = ".agents/skills/"
+project_config = "openspec/config.yaml"
+changes = "openspec/changes/"
+main_specs = "openspec/specs/"
+archive = "openspec/changes/archive/"
+# For a named store or alternate root, use the paths reported by OpenSpec CLI.
+# Do not construct paths by substituting an unverified change name.
 
 [[rules]]
 skill = "openspec-propose"
 when = "Create a proposal, design, specifications, and tasks for an applicable new change."
+examples = ["用 OpenSpec 提出方案", "为这个功能创建提案", "create an OpenSpec proposal"]
+pre_read = [".agents/skills/openspec-propose/SKILL.md"]
 
 [[rules]]
 skill = "openspec-explore"
 when = "Explore requirements and design tradeoffs in an explicitly requested or existing OpenSpec change."
+examples = ["用 OpenSpec 探索方案", "讨论这个 OpenSpec 变更的设计", "explore an OpenSpec change"]
+pre_read = [".agents/skills/openspec-explore/SKILL.md"]
 
 [[rules]]
 skill = "openspec-apply-change"
 when = "Implement or continue tasks for an identifiable existing OpenSpec change."
+examples = ["实施这个 OpenSpec 变更", "继续这个 change", "apply the OpenSpec change"]
+pre_read = [".agents/skills/openspec-apply-change/SKILL.md"]
 
 [[rules]]
 skill = "openspec-update-change"
 when = "Revise an existing change's proposal, design, specifications, or task plan."
+examples = ["修改这个 change 的设计", "更新 OpenSpec 任务计划", "update an OpenSpec change"]
+pre_read = [".agents/skills/openspec-update-change/SKILL.md"]
 
 [[rules]]
 skill = "openspec-sync-specs"
 when = "Synchronize delta specs when requested or included in the authorized workflow."
+examples = ["同步 OpenSpec 规格", "将变更规格同步到主规格", "sync OpenSpec specs"]
+pre_read = [".agents/skills/openspec-sync-specs/SKILL.md"]
 
 [[rules]]
 skill = "openspec-archive-change"
 when = "Archive a completed OpenSpec change when requested; do not archive the GitHub repository."
+examples = ["归档已完成的 OpenSpec 变更", "archive this OpenSpec change"]
+pre_read = [".agents/skills/openspec-archive-change/SKILL.md"]

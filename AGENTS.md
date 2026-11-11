@@ -17,7 +17,7 @@
 
 用户明确要求 OpenSpec、规范驱动开发或指定现有 OpenSpec change 时使用；涉及多模块行为、公共接口或需要先确认设计的重大变更，也可使用。简单文档、路径、配置调整和局部修复直接处理，不强制创建提案。用户当前指令和仓库实际情况优先于生成的技能模板；不得因模板中的工具名称而调用不可用工具或擅自派发子任务。
 
-技能位于 `.agents/skills/`，激活条件与阶段路由记录在 `.agents/activation.toml`；涉及 OpenSpec 时先读取该文件，再按任务读取对应 `SKILL.md`：
+技能位于 `.agents/skills/`，激活条件、常见请求示例、预读文件与路径约定记录在 `.agents/activation.toml`。涉及 OpenSpec 时先读该文件及其 `context.pre_read`，根据任务按 `conditional_pre_read` 补充上下文，并读取选中规则的 `pre_read`（对应技能的 `SKILL.md`）；示例帮助判断意图，不是自动关键词匹配。以 OpenSpec CLI 报告的实际路径为准：
 
 - 新建提案、设计、规格和任务：`openspec-propose`。
 - 在 OpenSpec 变更上下文中探索需求和设计取舍：`openspec-explore`。
