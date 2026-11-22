@@ -21,6 +21,11 @@ def factor_volume_mean5(df: pd.DataFrame) -> pd.Series:
     return rolling.groupby(df["symbol"], sort=False).shift(1)
 
 
+def factor_lagged_return(df: pd.DataFrame) -> pd.Series:
+    """取每只股票上一条观测的日收益率，输入须按股票内的时间排序。"""
+    return df.groupby("symbol", sort=False)["ret_1d"].shift(1)
+
+
 def factor_future_return(df: pd.DataFrame) -> pd.Series:
     """Intentional leak: aligns tomorrow's return onto today's row."""
 
