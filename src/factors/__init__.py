@@ -7,6 +7,7 @@ from typing import Callable, Dict
 import pandas as pd
 
 from . import sample_factors
+from .ohlcv_factors import leaky_ohlcv_factor_functions, ohlcv_factor_functions
 
 FactorFunction = Callable[[pd.DataFrame], pd.Series]
 
@@ -35,10 +36,25 @@ def get_registered_factors() -> Dict[str, FactorDefinition]:
             function=sample_factors.factor_volume_mean5,
             description="Lagged mean volume over a 5-day window",
         ),
+        "factor_lagged_return": FactorDefinition(
+            name="factor_lagged_return",
+            function=sample_factors.factor_lagged_return,
+            description="Previous observation's daily return per symbol",
+        ),
         "factor_future_return": FactorDefinition(
             name="factor_future_return",
             function=sample_factors.factor_future_return,
             description="Intentional leak: aligns future return onto today's row",
             is_intentional_leak=True,
         ),
+        **{
+            name: FactorDefinition(name=name, function=function, description=description)
+            for name, function, description in ohlcv_factor_functions()
+        },
+        **{
+            name: FactorDefinition(
+                name=name, function=function, description=description, is_intentional_leak=True
+            )
+            for name, function, description in leaky_ohlcv_factor_functions()
+        },
     }
